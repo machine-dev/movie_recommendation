@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from data_loader import load_data
 from preprocess import preprocess_data
@@ -23,10 +24,14 @@ def recommend_movies(df, movie_title, num_recommendations=5):
     return recommendations[['映画タイトル', 'ジャンル', '評価', '公開日', '監督']].head(num_recommendations)
 
 if __name__ == "__main__":
-    file_path = '../data/movie_data.xlsx'
+    file_path = os.path.abspath('/Users/sn/Desktop/for_dev_me/movie_recommendation/data/movie_data.xlsx')
     df = load_data(file_path)
     df = preprocess_data(df)
+    # 以下の映画の内容をベースに類似度を計算する
     movie_title = 'Rising Thunder'
     recommendations = recommend_movies(df, movie_title)
     print("Recommended movies:")
     print(recommendations)
+
+import os
+print("Current working directory:", os.getcwd())
